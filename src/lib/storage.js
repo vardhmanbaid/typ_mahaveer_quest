@@ -13,6 +13,7 @@ export const DEFAULT_PROGRESS = {
   currentStreakDays: 0,
   lastPlayedDate: null,      // yyyy-mm-dd
   badges: [],                // array of badge ids earned
+  levelProgress: {},         // { [levelId]: { index, correctCount, wrongCount, score, streak, bestStreak } }
 }
 
 export function loadProgress() {

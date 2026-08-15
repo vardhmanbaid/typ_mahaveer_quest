@@ -72,5 +72,23 @@ export function useGameState() {
     setProgress(loadProgress())
   }, [])
 
-  return { progress, recordLevelResult, recordRandomResult, resetProgress }
+  const saveLevelProgress = useCallback(({ levelId, index, correctCount, wrongCount, score, streak, bestStreak }) => {
+    setProgress((p) => ({
+      ...p,
+      levelProgress: {
+        ...p.levelProgress,
+        [levelId]: { index, correctCount, wrongCount, score, streak, bestStreak }
+      }
+    }))
+  }, [])
+
+  const clearLevelProgress = useCallback((levelId) => {
+    setProgress((p) => {
+      const newProgress = { ...p.levelProgress }
+      delete newProgress[levelId]
+      return { ...p, levelProgress: newProgress }
+    })
+  }, [])
+
+  return { progress, recordLevelResult, recordRandomResult, resetProgress, saveLevelProgress, clearLevelProgress }
 }

@@ -20,7 +20,7 @@
     "levelLabel": "स्तर",
     "questionOf": "प्रश्न {{current}}",
     "endlessWanderLabel": "मिक्स मोड",
-    "streak": "लकीर",
+    "streak": "स्ट्रीक",
     "randomQuestion": "मिक्स प्रश्न",
     "stopHere": "यहाँ रुको",
     "next": "अगला",
@@ -49,7 +49,7 @@
   },
   "stats": {
     "mahaveerQuest": "महावीर क्वेस्ट",
-    "journeyThroughJina": "जीना के जीवन के माध्यम से यात्रा"
+    "journeyThroughJina": "जीन के जीवन के माध्यम से यात्रा"
   },
   "badges": {
     "first_step": "पहला कदम",

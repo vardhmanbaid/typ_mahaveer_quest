@@ -24,7 +24,7 @@ function Fade({ children, k }) {
 }
 
 export default function App() {
-  const { progress, recordLevelResult, recordRandomResult, resetProgress } = useGameState()
+  const { progress, recordLevelResult, recordRandomResult, resetProgress, saveLevelProgress, clearLevelProgress } = useGameState()
   const [screen, setScreen] = useState('home') // home | levelmap | quiz | result
   const [quizConfig, setQuizConfig] = useState(null) // { mode, levelId }
   const [summary, setSummary] = useState(null)
@@ -58,6 +58,7 @@ export default function App() {
   function finishLevel({ levelId, correct, wrong, score, bestStreakInSession }) {
     const prevBest = progress.levelBestScore[levelId] || 0
     recordLevelResult({ levelId, correct, wrong, score, bestStreakInSession })
+    clearLevelProgress(levelId)
     setSummary({ mode: 'level', levelId, correct, wrong, score, isHighScore: score > prevBest })
     setScreen('result')
   }
@@ -97,6 +98,8 @@ export default function App() {
             onExit={quizConfig.mode === 'level' ? goLevelMap : goHome}
             onFinishLevel={finishLevel}
             onFinishRandom={finishRandom}
+            resumeData={quizConfig.mode === 'level' ? progress.levelProgress[quizConfig.levelId] : null}
+            onSaveProgress={saveLevelProgress}
           />
         )}
         {screen === 'result' && summary && (

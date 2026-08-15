@@ -34,7 +34,15 @@ function shuffleOptions(q) {
   };
 }
 
-export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
+export function Quiz({
+  mode,
+  levelId,
+  onExit,
+  onFinishLevel,
+  onFinishRandom,
+  resumeData,
+  onSaveProgress,
+}) {
   const { t } = useTranslation();
   const baseQuestions = useMemo(() => {
     if (mode === "level")
@@ -43,12 +51,14 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
   }, [mode, levelId]);
 
   const [queue, setQueue] = useState(baseQuestions);
-  const [index, setIndex] = useState(0);
-  const [score, setScore] = useState(0);
-  const [streak, setStreak] = useState(0);
-  const [bestStreak, setBestStreak] = useState(0);
-  const [correctCount, setCorrectCount] = useState(0);
-  const [wrongCount, setWrongCount] = useState(0);
+  const [index, setIndex] = useState(resumeData?.index ?? 0);
+  const [score, setScore] = useState(resumeData?.score ?? 0);
+  const [streak, setStreak] = useState(resumeData?.streak ?? 0);
+  const [bestStreak, setBestStreak] = useState(resumeData?.bestStreak ?? 0);
+  const [correctCount, setCorrectCount] = useState(
+    resumeData?.correctCount ?? 0,
+  );
+  const [wrongCount, setWrongCount] = useState(resumeData?.wrongCount ?? 0);
   const [selected, setSelected] = useState(null);
   const [answered, setAnswered] = useState(false);
   const [floatTick, setFloatTick] = useState(null); // { id, text, positive }
@@ -59,6 +69,34 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
   const current = queue[index];
   const levelInfo =
     mode === "level" ? LEVELS.find((l) => l.id === levelId) : null;
+
+  useEffect(() => {
+    const handleBeforeUnload = () => {
+      if (mode === "level") {
+        onSaveProgress({
+          levelId,
+          index,
+          correctCount,
+          wrongCount,
+          score,
+          streak,
+          bestStreak,
+        });
+      }
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, [
+    mode,
+    levelId,
+    index,
+    correctCount,
+    wrongCount,
+    score,
+    streak,
+    bestStreak,
+    onSaveProgress,
+  ]);
 
   // extend random queue as needed so it never runs out
   useEffect(() => {
@@ -126,6 +164,21 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
     });
   }
 
+  function handleExit() {
+    if (mode === "level") {
+      onSaveProgress({
+        levelId,
+        index,
+        correctCount,
+        wrongCount,
+        score,
+        streak,
+        bestStreak,
+      });
+    }
+    onExit();
+  }
+
   if (!current) return null;
 
   const progressPct =
@@ -141,7 +194,7 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
           <Button
             variant="ghost"
             size="icon"
-            onClick={onExit}
+            onClick={handleExit}
             aria-label={t("quiz.quit")}
           >
             <X size={20} />
@@ -159,8 +212,8 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
           <span>
             {mode === "level" ? (
               <>
-                Level {levelId} · {levelInfo?.title} —{" "}
-                {t("quiz.questionOf", { current: index + 1 })}
+                {t("quiz.levelLabel")} {levelId} · {levelInfo?.title} —{" "}
+                {t("quiz.questionOf", { current: index + 1 })}/{total}
               </>
             ) : (
               <>
