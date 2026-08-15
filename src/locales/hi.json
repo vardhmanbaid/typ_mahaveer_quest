@@ -1,0 +1,72 @@
+{
+  "app": {
+    "title": "महावीर क्वेस्ट",
+    "subtitle": "जीना के जीवन की यात्रा",
+    "tagline": "महावीर जयंती • 24वें तीर्थंकर"
+  },
+  "home": {
+    "description": "उनकी जीवन कहानी को सीखें, एक सवाल एक बार। अंक अर्जित करें, स्तर खोलें, और कहानी सामने आते ही बैज एकत्र करें।",
+    "storyMode": "कहानी मोड",
+    "storyModeDesc": "{{total}} स्तर · प्रत्येक में प्रश्न, जन्म से निर्वाण तक क्रम में।",
+    "levelsClearedLabel": "स्तर पूरे किए",
+    "endlessWander": "अंतहीन भटकन",
+    "endlessWanderDesc": "यादृच्छिक प्रश्न, कोई सीमा नहीं। तब तक खेलें जब तक आप रुकना न चाहें — अपना उच्च स्कोर प्राप्त करें।",
+    "bestScore": "सर्वश्रेष्ठ",
+    "scoringInfo": "+5 प्रत्येक सही उत्तर के लिए अंक, −3 एक गलत के लिए। सटीकता आपको तारे अर्जित करती है, न कि केवल गति।",
+    "progressSaved": "आपकी प्रगति इस डिवाइस पर सहेजी गई है — कोई खाता आवश्यक नहीं है।"
+  },
+  "quiz": {
+    "quit": "छोड़ो",
+    "levelLabel": "स्तर",
+    "questionOf": "प्रश्न {{current}}",
+    "endlessWanderLabel": "अंतहीन भटकन",
+    "streak": "लकीर",
+    "randomQuestion": "यादृच्छिक प्रश्न",
+    "stopHere": "यहाँ रुको",
+    "next": "अगला",
+    "finishLevel": "स्तर समाप्त करें",
+    "didYouKnow": "क्या आप जानते हैं —"
+  },
+  "result": {
+    "levelComplete": "स्तर {{level}} पूर्ण",
+    "sessionComplete": "सत्र पूर्ण",
+    "wellWandered": "अच्छी तरह भटकाया",
+    "points": "अंक",
+    "correct": "सही",
+    "wrong": "गलत",
+    "newHighScore": "नया उच्च स्कोर!",
+    "badgeEarned": "बैज अर्जित किया",
+    "continueToLevel": "स्तर {{next}} पर जारी रखें",
+    "retry": "फिर से कोशिश करें",
+    "levelMap": "स्तर मानचित्र",
+    "home": "होम",
+    "backToHome": "घर वापस जाओ"
+  },
+  "levelMap": {
+    "storyMode": "कहानी मोड",
+    "garland": "क्षण की माला, जन्म से मुक्ति",
+    "back": "वापस"
+  },
+  "stats": {
+    "mahaveerQuest": "महावीर क्वेस्ट",
+    "journeyThroughJina": "जीना के जीवन के माध्यम से यात्रा"
+  },
+  "badges": {
+    "first_step": "पहला कदम",
+    "first_stepDesc": "स्तर 1 पूर्ण करें",
+    "half_journey": "आधे रास्ते",
+    "half_journeyDesc": "स्तर 4 तक पहुंचें",
+    "enlightened": "केवलज्ञान",
+    "enlightenedDesc": "सभी स्तरों को समाप्त करें",
+    "perfectionist": "तीन रत्न",
+    "perfectionistDesc": "एक स्तर पर 3 तारे अर्जित करें",
+    "streak_5": "स्थिर मन",
+    "streak_5Desc": "पंक्ति में 5 सही उत्तर",
+    "streak_10": "अटल",
+    "streak_10Desc": "पंक्ति में 10 सही उत्तर",
+    "random_master": "भटकते ऋषि",
+    "random_masterDesc": "यादृच्छिक मोड में 100+ स्कोर करें",
+    "loyal_seeker": "वफादार साधक",
+    "loyal_seekerDesc": "लगातार 3 दिन खेलें"
+  }
+}
