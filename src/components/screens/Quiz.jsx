@@ -134,53 +134,54 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
       : Math.min(100, (index % total) * total);
 
   return (
-    <div className="mx-auto max-w-xl px-5 py-5 min-h-screen flex flex-col">
-      {/* top bar */}
-      <div className="flex items-center gap-3">
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={onExit}
-          aria-label={t("quiz.quit")}
-        >
-          <X size={20} />
-        </Button>
-        <div className="flex-1">
-          <Progress value={progressPct} />
-        </div>
-        <div className="flex items-center gap-1.5 text-sm font-bold text-maroon-deep min-w-[54px] justify-end">
-          <Gem size={15} className="text-marigold" />
-          {score}
-        </div>
-      </div>
-
-      <div className="flex items-center justify-between mt-3 text-xs text-indigo/50">
-        <span>
-          {mode === "level" ? (
-            <>
-              Level {levelId} · {levelInfo?.title} —{" "}
-              {t("quiz.questionOf", { current: index + 1 })}
-            </>
-          ) : (
-            <>
-              {t("quiz.endlessWanderLabel")} —{" "}
-              {t("quiz.questionOf", { current: index + 1 })}
-            </>
-          )}
-        </span>
-        {streak >= 2 && (
-          <motion.span
-            initial={{ scale: 0.5, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="flex items-center gap-1 text-bad font-semibold"
+    <div className="mx-auto max-w-xl h-screen px-4 py-4 flex flex-col space-y-32 overflow-hidden">
+      <div>
+        {/* top bar */}
+        <div className="flex items-center gap-2 flex-shrink-0">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={onExit}
+            aria-label={t("quiz.quit")}
           >
-            <Flame size={14} /> {streak} {t("quiz.streak")}
-          </motion.span>
-        )}
-      </div>
+            <X size={20} />
+          </Button>
+          <div className="flex-1">
+            <Progress value={progressPct} />
+          </div>
+          <div className="flex items-center gap-1.5 text-xs font-bold text-maroon-deep min-w-[54px] justify-end">
+            <Gem size={14} className="text-marigold" />
+            {score}
+          </div>
+        </div>
 
-      {/* question card */}
-      <div className="flex-1 flex flex-col justify-center py-6 relative">
+        <div className="flex items-center justify-between mt-1.5 text-xs text-indigo/50 flex-shrink-0">
+          <span>
+            {mode === "level" ? (
+              <>
+                Level {levelId} · {levelInfo?.title} —{" "}
+                {t("quiz.questionOf", { current: index + 1 })}
+              </>
+            ) : (
+              <>
+                {t("quiz.endlessWanderLabel")} —{" "}
+                {t("quiz.questionOf", { current: index + 1 })}
+              </>
+            )}
+          </span>
+          {streak >= 2 && (
+            <motion.span
+              initial={{ scale: 0.5, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              className="flex items-center gap-1 text-bad font-semibold"
+            >
+              <Flame size={12} /> {streak} {t("quiz.streak")}
+            </motion.span>
+          )}
+        </div>
+      </div>
+      {/* question card - scrollable if needed */}
+      <div className="flex flex-col min-h-0 py-2">
         <AnimatePresence mode="wait">
           <motion.div
             key={current.id + index}
@@ -191,24 +192,24 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
           >
             <div
               key={shakeKey}
-              className={`rounded-2xl bg-white/80 border border-indigo/10 p-6 sm:p-7 shadow-sm relative ${!answered ? "" : selected !== current.answer ? "animate-shake" : ""}`}
+              className={`rounded-2xl bg-white/80 border border-indigo/10 p-5 shadow-sm relative ${!answered ? "" : selected !== current.answer ? "animate-shake" : ""}`}
             >
               {floatTick && (
                 <motion.span
                   key={floatTick.id}
-                  className={`absolute right-6 top-4 font-display text-2xl font-bold pointer-events-none ${floatTick.positive ? "text-ok" : "text-bad"} animate-score-fly`}
+                  className={`absolute right-5 top-3 font-display text-2xl font-bold pointer-events-none ${floatTick.positive ? "text-ok" : "text-bad"} animate-score-fly`}
                 >
                   {floatTick.text}
                 </motion.span>
               )}
-              <p className="font-label text-[11px] tracking-[0.2em] uppercase text-marigold mb-3">
+              <p className="font-label text-[10px] tracking-[0.2em] uppercase text-marigold mb-2">
                 {mode === "level" ? levelInfo?.theme : t("quiz.randomQuestion")}
               </p>
-              <h2 className="font-display text-2xl sm:text-3xl leading-snug text-indigo">
+              <h2 className="font-display text-xl sm:text-2xl leading-tight text-indigo">
                 {current.question}
               </h2>
 
-              <div className="mt-6 grid gap-3">
+              <div className="mt-4 grid gap-2">
                 {current.options.map((opt, i) => {
                   const isCorrectOpt = i === current.answer;
                   const isSelected = i === selected;
@@ -224,14 +225,14 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
                       key={i}
                       onClick={() => handleAnswer(i)}
                       disabled={answered}
-                      className={`text-left rounded-xl border-2 px-4 py-3.5 font-body text-[15px] transition-all flex items-center justify-between gap-3 ${cls}`}
+                      className={`text-left rounded-lg border-2 px-3 py-2.5 font-body text-sm transition-all flex items-center justify-between gap-2 ${cls}`}
                     >
                       <span>{opt}</span>
                       {answered && isCorrectOpt && (
-                        <Check size={18} className="text-ok shrink-0" />
+                        <Check size={16} className="text-ok shrink-0" />
                       )}
                       {answered && isSelected && !isCorrectOpt && (
-                        <XCircle size={18} className="text-bad shrink-0" />
+                        <XCircle size={16} className="text-bad shrink-0" />
                       )}
                     </button>
                   );
@@ -246,7 +247,7 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="mt-5 rounded-xl bg-parchment-dim border border-marigold/30 p-4 text-sm text-indigo/80">
+                    <div className="mt-3 rounded-lg bg-parchment-dim border border-marigold/30 p-3 text-xs text-indigo/80">
                       <span className="font-label text-maroon-deep font-semibold mr-1">
                         {t("quiz.didYouKnow")}
                       </span>
@@ -261,19 +262,19 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
       </div>
 
       {/* bottom action bar */}
-      <div className="flex items-center gap-3 pb-2">
+      <div className="flex items-center gap-2 pt-2 flex-shrink-0">
         {mode === "random" && (
           <Button
             variant="outline"
-            size="lg"
+            size="sm"
             className="flex-1"
             onClick={stopRandom}
           >
-            <Square size={16} /> {t("quiz.stopHere")}
+            <Square size={14} /> {t("quiz.stopHere")}
           </Button>
         )}
         <Button
-          size="lg"
+          size="sm"
           className="flex-1"
           disabled={!answered}
           onClick={goNext}
@@ -281,7 +282,7 @@ export function Quiz({ mode, levelId, onExit, onFinishLevel, onFinishRandom }) {
           {mode === "level" && index + 1 >= total
             ? t("quiz.finishLevel")
             : t("quiz.next")}{" "}
-          <ArrowRight size={18} />
+          <ArrowRight size={16} />
         </Button>
       </div>
     </div>

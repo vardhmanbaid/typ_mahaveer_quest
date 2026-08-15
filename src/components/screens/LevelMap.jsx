@@ -24,8 +24,8 @@ const ICONS = {
 };
 
 const NODE_X = [22, 78, 22, 78, 22, 78]; // alternating left/right, in %
-const ROW_H = 168; // px vertical spacing per level
-const TOP_PAD = 40;
+const ROW_H = 140; // px vertical spacing per level (reduced for mobile)
+const TOP_PAD = 32;
 
 export function LevelMap({ progress, onBack, onPlayLevel }) {
   const { t } = useTranslation();
@@ -48,28 +48,28 @@ export function LevelMap({ progress, onBack, onPlayLevel }) {
 
   return (
     <div className="h-screen flex flex-col mx-auto max-w-xl">
-      <div className="px-5 py-6 flex-shrink-0">
-        <div className="flex items-center gap-3 mb-2">
+      <div className="px-5 py-4 sm:py-6 flex-shrink-0">
+        <div className="flex items-center gap-2 sm:gap-3 mb-1.5 sm:mb-2">
           <Button
             variant="ghost"
             size="icon"
             onClick={onBack}
             aria-label="Back"
           >
-            <ArrowLeft size={20} />
+            <ArrowLeft size={18} className="sm:w-5 sm:h-5" />
           </Button>
           <div>
-            <h2 className="font-display text-3xl text-maroon-deep leading-none">
+            <h2 className="font-display text-2xl sm:text-3xl text-maroon-deep leading-none">
               {t("levelMap.storyMode")}
             </h2>
-            <p className="text-xs text-indigo/50 mt-1">
+            <p className="text-xs text-indigo/50 mt-0.5 sm:mt-1">
               {t("levelMap.garland")}
             </p>
           </div>
         </div>
       </div>
       <div className="flex-1 overflow-y-auto scrollbar-none">
-        <div className="p-2">
+        <div className="p-1 sm:p-2">
           <div className="relative mt-4" style={{ height }}>
             <svg
               viewBox={`0 0 100 ${height}`}
@@ -111,40 +111,40 @@ export function LevelMap({ progress, onBack, onPlayLevel }) {
                     disabled={locked}
                     onClick={() => onPlayLevel(lvl.id)}
                     className={[
-                      "relative h-20 w-20 rounded-full flex items-center justify-center border-4 transition-all",
+                      "relative h-16 sm:h-20 w-16 sm:w-20 rounded-full flex items-center justify-center border-3 sm:border-4 transition-all",
                       locked
                         ? "bg-indigo/10 border-indigo/10 text-indigo/30 cursor-not-allowed"
                         : isNext
-                          ? "bg-maroon border-marigold text-parchment shadow-[0_6px_0_0_var(--color-maroon-deep)] animate-glow-pulse"
-                          : "bg-marigold border-marigold-light text-indigo shadow-[0_5px_0_0_#a97a26] hover:brightness-105 active:translate-y-0.5",
+                          ? "bg-maroon border-marigold text-parchment shadow-[0_4px_0_0_var(--color-maroon-deep)] sm:shadow-[0_6px_0_0_var(--color-maroon-deep)] animate-glow-pulse"
+                          : "bg-marigold border-marigold-light text-indigo shadow-[0_4px_0_0_#a97a26] sm:shadow-[0_5px_0_0_#a97a26] hover:brightness-105 active:translate-y-0.5",
                     ].join(" ")}
                   >
                     {locked ? (
-                      <Lock size={24} />
+                      <Lock size={20} className="sm:w-6 sm:h-6" />
                     ) : (
-                      <Icon size={26} strokeWidth={2} />
+                      <Icon size={22} strokeWidth={2} className="sm:w-7 sm:h-7" />
                     )}
-                    <span className="absolute -bottom-2 -right-1 h-7 w-7 rounded-full bg-parchment border border-indigo/10 text-[11px] font-bold text-maroon-deep flex items-center justify-center">
+                    <span className="absolute -bottom-1.5 -right-0.5 h-6 w-6 sm:h-7 sm:w-7 rounded-full bg-parchment border border-indigo/10 text-[10px] sm:text-[11px] font-bold text-maroon-deep flex items-center justify-center">
                       {lvl.id}
                     </span>
                   </button>
 
                   <p
-                    className={`mt-3 text-center font-label text-sm leading-tight ${locked ? "text-indigo/30" : "text-maroon-deep"}`}
+                    className={`mt-1.5 sm:mt-3 text-center font-label text-xs sm:text-sm leading-tight ${locked ? "text-indigo/30" : "text-maroon-deep"}`}
                   >
                     {lvl.title}
                   </p>
                   {!locked && (
-                    <div className="flex gap-0.5 mt-1">
+                    <div className="flex gap-0.5 mt-0.5 sm:mt-1 justify-center">
                       {[0, 1, 2].map((s) => (
                         <Star
                           key={s}
-                          size={13}
-                          className={
+                          size={11}
+                          className={`sm:w-3.5 sm:h-3.5 ${
                             s < stars
                               ? "fill-marigold text-marigold"
                               : "text-indigo/15"
-                          }
+                          }`}
                         />
                       ))}
                     </div>

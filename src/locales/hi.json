@@ -9,8 +9,8 @@
     "storyMode": "कहानी मोड",
     "storyModeDesc": "{{total}} स्तर · प्रत्येक में प्रश्न, जन्म से निर्वाण तक क्रम में।",
     "levelsClearedLabel": "स्तर पूरे किए",
-    "endlessWander": "अंतहीन भटकन",
-    "endlessWanderDesc": "यादृच्छिक प्रश्न, कोई सीमा नहीं। तब तक खेलें जब तक आप रुकना न चाहें — अपना उच्च स्कोर प्राप्त करें।",
+    "endlessWander": "मिक्स मोड",
+    "endlessWanderDesc": "मिक्स प्रश्न, कोई सीमा नहीं। तब तक खेलें जब तक आप रुकना न चाहें — अपना उच्च स्कोर प्राप्त करें।",
     "bestScore": "सर्वश्रेष्ठ",
     "scoringInfo": "+5 प्रत्येक सही उत्तर के लिए अंक, −3 एक गलत के लिए। सटीकता आपको तारे अर्जित करती है, न कि केवल गति।",
     "progressSaved": "आपकी प्रगति इस डिवाइस पर सहेजी गई है — कोई खाता आवश्यक नहीं है।"
@@ -19,9 +19,9 @@
     "quit": "छोड़ो",
     "levelLabel": "स्तर",
     "questionOf": "प्रश्न {{current}}",
-    "endlessWanderLabel": "अंतहीन भटकन",
+    "endlessWanderLabel": "मिक्स मोड",
     "streak": "लकीर",
-    "randomQuestion": "यादृच्छिक प्रश्न",
+    "randomQuestion": "मिक्स प्रश्न",
     "stopHere": "यहाँ रुको",
     "next": "अगला",
     "finishLevel": "स्तर समाप्त करें",
@@ -65,7 +65,7 @@
     "streak_10": "अटल",
     "streak_10Desc": "पंक्ति में 10 सही उत्तर",
     "random_master": "भटकते ऋषि",
-    "random_masterDesc": "यादृच्छिक मोड में 100+ स्कोर करें",
+    "random_masterDesc": "मिक्स मोड में 100+ स्कोर करें",
     "loyal_seeker": "वफादार साधक",
     "loyal_seekerDesc": "लगातार 3 दिन खेलें"
   }

@@ -12,5 +12,5 @@ export function Card({ className, ...props }) {
   )
 }
 export function CardContent({ className, ...props }) {
-  return <div className={cn('p-6', className)} {...props} />
+  return <div className={cn('p-4 sm:p-6', className)} {...props} />
 }
