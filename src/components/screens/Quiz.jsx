@@ -187,7 +187,7 @@ export function Quiz({
       : Math.min(100, (index % total) * total);
 
   return (
-    <div className="mx-auto max-w-xl h-screen px-4 py-4 flex flex-col space-y-24 overflow-hidden">
+    <div className="mx-auto max-w-xl h-screen px-4 py-4 flex flex-col space-y-8 overflow-hidden">
       <div>
         {/* top bar */}
         <div className="flex items-center gap-2 flex-shrink-0">
